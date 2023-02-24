@@ -7,7 +7,7 @@ const getVideogames = async ( req, res ) => {
     try {
         // Creo un arreglo e inserto los llamados a axios
         let promises = [];
-        for (let i = 1; i < 5; i++){
+        for (let i = 1; i < 6; i++){
             let apiGet = await axios(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`);
             promises.push(apiGet);
         };
@@ -17,7 +17,7 @@ const getVideogames = async ( req, res ) => {
             return{
                 id:videogame.id,
                 name:videogame.name,
-                Image:videogame.Image,
+                image:videogame.background_image,
                 genres:videogame.genres.map(genre => {
                     return {
                         name: genre.name

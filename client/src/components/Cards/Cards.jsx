@@ -1,7 +1,10 @@
-const Cards = () => {
+import Card from '../Card/Card.jsx'
+
+
+const Cards = ({ games }) => {
     return (
         <div>
-            Cards
+            { games.length ? games.map(game => <Card game={game} key={game.id}/>) : <p>Loading...</p>}
         </div>
     )
 }
