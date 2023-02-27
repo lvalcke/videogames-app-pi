@@ -34,7 +34,7 @@ module.exports = (sequelize) => {
         isUrl: true
       }
     },
-    raiting: {
+    rating: {
       type: DataTypes.FLOAT,
       allowNull: false,
       validate: {

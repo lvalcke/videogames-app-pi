@@ -18,6 +18,7 @@ const getVideogames = async ( req, res ) => {
                 id:videogame.id,
                 name:videogame.name,
                 image:videogame.background_image,
+                rating:videogame.rating,
                 genres:videogame.genres.map(genre => {
                     return {
                         name: genre.name
@@ -30,7 +31,7 @@ const getVideogames = async ( req, res ) => {
         promises.map(games => { allVideogames = allVideogames.concat(games) })
         // Traigo los juegos q pueda tener en la db y los concateno con a allVideogames
         let dbVideogames = await Videogame.findAll({
-            attributes:['id','name','image'],
+            attributes:['id','name','image','rating'],
             include: [{
                 model:Genre,
                 attributes:['name'],
