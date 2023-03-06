@@ -5,7 +5,11 @@ import { useSelector } from "react-redux";
 const Cards = ({ games }) => {
 
     const buttons = [];
-    let allGames = games;
+    let allGames = games.map(game => {
+                 return {
+                  ...game,
+                  genres: game.genres.map(genre => genre.name).join(', ')
+                 }})
     let message = 'Loading...'
     const [ page, setPage ] = useState(0)
     const [ genre, setGenre ] = useState('')
@@ -87,7 +91,7 @@ const Cards = ({ games }) => {
     if(orderRtg === 'Descending'){
         allGames.sort((x,y) => y.rating - x.rating)
     }
-    console.log(allGames)
+
     return (
         <div> 
             <div>

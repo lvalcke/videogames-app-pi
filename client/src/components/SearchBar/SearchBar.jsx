@@ -1,6 +1,6 @@
 import { useState } from "react"
 
-const SearchBar = () => {
+const SearchBar = ({onSearch}) => {
     
     const [ name, setName ] = useState('')
 
@@ -11,7 +11,7 @@ const SearchBar = () => {
     return (
         <div>
          <input type='search' value={name} onChange={handleChange} />
-         <button>Search</button>
+         <button onClick={() => onSearch(name)}>Search</button>
         </div>
     )
 }

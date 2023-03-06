@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import { getAllGames, getGenres } from '../../redux/actions.js';
+import { getAllGames, getGamesByName, getGenres } from '../../redux/actions.js';
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
-
+import SearchBar from '../SearchBar/SearchBar.jsx'
 
 
 const NavBar = () => {
@@ -11,9 +11,10 @@ const NavBar = () => {
         dispatch(getAllGames())
         dispatch(getGenres())
     },[])
-    // const onSearch = (name) => {
-    //     dispatch(getGamesByName(name))
-    // }
+    const onSearch = (name) => {
+        dispatch(getGamesByName(name))
+    }
+    
     return (
         <div>
             <div>
@@ -25,7 +26,9 @@ const NavBar = () => {
             <div>
              <NavLink to='/createForm' >Crear videojuego</NavLink>
             </div>
-            
+            <div>
+             <SearchBar onSearch={onSearch}/>         
+            </div>
         </div>
     )
 }
