@@ -23,13 +23,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
+    released: {
       type: DataTypes.DATEONLY,
       allowNull: false,
     },
-    image: {
+    background_image: {
       type: DataTypes.STRING,
-      allowNull: false,
+      defaultValue: "https://serviciopad.es/wp-content/uploads/estudio-revela-que-estadounidenses-gastan-cada-vez-mas-en-videojuegos-02-e1445888221548.jpeg",
+      allowNull: true,
       validate: {
         isUrl: true
       }

@@ -27,21 +27,23 @@ const Cards = ({ games }) => {
     }
     const handleFilterByGenre = (event) => {
         setGenre(event.target.value)
+        page>0 && setPage(0)
     }
     const handleFilterByOrg = (event) => {
         setOrigin(event.target.value)
     }
     const handleOrderAlf = (event) => {
         setOrderAlf(event.target.value)
+        setOrderRtg('')
     }
     const handleOrderRtg = (event) => {
         setOrderRtg(event.target.value)
+        setOrderAlf('')
     }
     
     
     if (genre !== '') {
         allGames = allGames.filter(game => game.genres.includes(genre))
-        page>0 && setPage(0)
         if(!allGames.length) message = 'There are no games with that genre'
     }
     
@@ -85,28 +87,28 @@ const Cards = ({ games }) => {
     if(orderRtg === 'Descending'){
         allGames.sort((x,y) => y.rating - x.rating)
     }
-
+    console.log(allGames)
     return (
         <div> 
             <div>
-            {genres.map(genre => <button value={genre.name} onClick={handleFilterByGenre} key={genre.id}>{genre.name}</button>)}
+             {genres.map(genre => <button value={genre.name} onClick={handleFilterByGenre} key={genre.id}>{genre.name}</button>)}
             </div>
             <div>
-            <button onClick={handleFilterByOrg} value='api' > Site Games </button>    
-            <button onClick={handleFilterByOrg} value='db' > Users Games </button>    
-            <button onClick={handleFilterByOrg} value='all' > All Games </button>    
-            <button onClick={handleOrderAlf} value='A-Z' >&uArr;&dArr; A-Z </button>
-            <button onClick={handleOrderAlf} value='Z-A' >&uArr;&dArr; Z-A </button>
-            <button onClick={handleOrderRtg} value='Ascending' >&uArr; Raiting </button>
-            <button onClick={handleOrderRtg} value='Descending' >&dArr; Raiting </button>
+             <button onClick={handleFilterByOrg} value='api' > Site Games </button>    
+             <button onClick={handleFilterByOrg} value='db' > Users Games </button>    
+             <button onClick={handleFilterByOrg} value='all' > All Games </button>    
+             <button onClick={handleOrderAlf} value='A-Z' >&uArr;&dArr; A-Z </button>
+             <button onClick={handleOrderAlf} value='Z-A' >&uArr;&dArr; Z-A </button>
+             <button onClick={handleOrderRtg} value='Ascending' >&uArr; Raiting </button>
+             <button onClick={handleOrderRtg} value='Descending' >&dArr; Raiting </button>
             </div>           
             <div>
-            { page>0 && <button onClick={handlePagePrev}>&lArr;</button>}   
-            {buttons.map((button,i) => <button value={i} onClick={handlePage} key={i}>{button}</button>)}
-            { page<(allGames.length-15) && <button onClick={handlePageNext}>&rArr;</button>}   
+             { page>0 && <button onClick={handlePagePrev}>&lArr;</button>}   
+             {buttons.map((button,i) => <button value={i} onClick={handlePage} key={i}>{button}</button>)}
+             { page<(allGames.length-15) && <button onClick={handlePageNext}>&rArr;</button>}   
             </div>
             <div>
-            { allGames.length ? allGames.slice(page, (page+15)).map(game => <Card game={game} key={game.id}/>) : <p>{message}</p>}
+             { allGames.length ? allGames.slice(page, (page+15)).map((game,i) => <Card game={game} key={i}/>) : <p>{message}</p>}
             </div>
             
         </div>
