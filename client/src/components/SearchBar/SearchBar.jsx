@@ -1,5 +1,6 @@
 import { useState } from "react"
 
+
 const SearchBar = ({onSearch}) => {
     
     const [ name, setName ] = useState('')

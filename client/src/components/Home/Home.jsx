@@ -16,7 +16,7 @@ const Home = () => {
         }else if(allGames.length){
             setGames(allGames)
         }
-        console.log(gamesByName)
+        
     },[allGames,gamesByName])   
 
     

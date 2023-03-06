@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { getAllGames, getGamesByName, getGenres } from '../../redux/actions.js';
 import { useEffect } from "react";
 import { useDispatch } from 'react-redux';
@@ -7,12 +7,14 @@ import SearchBar from '../SearchBar/SearchBar.jsx'
 
 const NavBar = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(() => {
         dispatch(getAllGames())
         dispatch(getGenres())
     },[])
     const onSearch = (name) => {
         dispatch(getGamesByName(name))
+        navigate('/home')
     }
     
     return (

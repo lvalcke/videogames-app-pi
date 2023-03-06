@@ -12,11 +12,11 @@ const validations = (gameData) => {
     if(!gameData.description.length){
         errors.description =`This field can't be empty`
     }
-    // if(/^(?:https?|ftp):\/\/(?:www\.)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(?:\/[\w#!:.?+=&%@!\-\/]*)?$/.test(gameData.background_image)){
-    //     errors.background_image =`This field must be a URL`
-    // }
+    if(gameData.background_image && !/^(?:https?|ftp):\/\/(?:www\.)?[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,}(?:\/[\w#!:.?+=&%@!\-\/]*)?$/.test(gameData.background_image)){
+        errors.background_image =`This field must be a URL`
+    }
     if(!gameData.released.length){
-        errors.release =`This field can't be empty`
+        errors.released =`This field can't be empty`
     }
     if(!gameData.rating.length){
         errors.rating =`This field can't be empty`
