@@ -4,6 +4,7 @@ import axios from "axios";
 import { url } from "../../redux/actions";
 import { getAllGames } from "../../redux/actions";
 import validations from "./Validations.js";
+import styled from "styled-components";
 
 const CreateForm = () => {
   const [gameData, setGameData] = useState({
@@ -85,9 +86,9 @@ const CreateForm = () => {
     return newGame;
   };
   return (
-    <form>
+    <StyledForm>
       <div>
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name">Name:  </label>
         <input
           type="text"
           name="name"
@@ -98,7 +99,7 @@ const CreateForm = () => {
       </div>
 
       <div>
-        <label htmlFor="description">Description:</label>
+        <label htmlFor="description">Description:  </label>
         <input
           type="text"
           name="description"
@@ -111,7 +112,7 @@ const CreateForm = () => {
       </div>
 
       <div>
-        <label htmlFor="background_image">Image:</label>
+        <label htmlFor="background_image">Image:  </label>
         <input
           type="text"
           name="background_image"
@@ -124,7 +125,7 @@ const CreateForm = () => {
       </div>
 
       <div>
-        <label htmlFor="rating">Rating:</label>
+        <label htmlFor="rating">Rating:  </label>
         <input
           type="text"
           name="rating"
@@ -135,7 +136,7 @@ const CreateForm = () => {
       </div>
 
       <div>
-        <label htmlFor="platforms">Platforms:</label>
+        <label htmlFor="platforms">Platforms:  </label>
         <input
           type="text"
           name="platforms"
@@ -146,7 +147,7 @@ const CreateForm = () => {
       </div>
 
       <div>
-        <label htmlFor="released">Release:</label>
+        <label htmlFor="released">Release:  </label>
         <input
           type="date"
           name="released"
@@ -156,20 +157,70 @@ const CreateForm = () => {
         {errors.released && <p style={{ color: "red" }}>{errors.released}</p>}
       </div>
 
-      <div>
+      <div className="genres">
+        <div>
         {allGenres.map((genre) => (
           <button name={genre.id} onClick={handleAddGenre} key={genre.id}>
             {genre.name}
           </button>
         ))}
+        </div>
+
         {errors.genres && <p style={{ color: "red" }}>{errors.genres}</p>}
       </div>
 
-      <button type="submit" disabled={Object.keys(errors).length? true : false} onClick={handleSubmit}>
+      <button className="submit" type="submit" disabled={Object.keys(errors).length? true : false} onClick={handleSubmit}>
         Submit
       </button>
-    </form>
+    </StyledForm>
   );
 };
+
+const StyledForm = styled.div`
+    padding: 10px;
+    background-image: url('https://fondosmil.com/fondo/3617.png');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    justify-content: space-around;
+    color: #740496;
+    div {
+      margin: 10px;
+      border: 5px solid #740496 ;
+      padding: 20px;
+      border-radius: 15px;
+      background-color: #ffffffb5;
+    }
+    .genres {
+      width: 30%;
+      text-align: center;
+    }
+    .genres div {
+      border: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items : center;
+      justify-content: center;
+      gap: 5px;      
+    }
+    .genres button {
+      font-size: 17px;
+      color: #5d0279;
+      border-radius: 7px;
+      border: 3px solid #740496;
+
+    }
+    .submit {
+      font-size: 25px;
+      color: white;
+      background-color: #c71919;
+      border-radius: 7px;
+      border: 3px solid red;
+    }
+
+
+`
 
 export default CreateForm;

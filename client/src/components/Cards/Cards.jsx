@@ -1,6 +1,7 @@
 import Card from '../Card/Card.jsx'
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import styled from 'styled-components';
 
 const Cards = ({ games }) => {
 
@@ -93,11 +94,11 @@ const Cards = ({ games }) => {
     }
 
     return (
-        <div> 
-            <div>
+        <StyledContainer> 
+            <div className='filter'>
              {genres.map(genre => <button value={genre.name} onClick={handleFilterByGenre} key={genre.id}>{genre.name}</button>)}
             </div>
-            <div>
+            <div className='filter'>
              <button onClick={handleFilterByOrg} value='api' > Site Games </button>    
              <button onClick={handleFilterByOrg} value='db' > Users Games </button>    
              <button onClick={handleFilterByOrg} value='all' > All Games </button>    
@@ -106,17 +107,55 @@ const Cards = ({ games }) => {
              <button onClick={handleOrderRtg} value='Ascending' >&uArr; Raiting </button>
              <button onClick={handleOrderRtg} value='Descending' >&dArr; Raiting </button>
             </div>           
-            <div>
+            <div className='pagination' >
              { page>0 && <button onClick={handlePagePrev}>&lArr;</button>}   
              {buttons.map((button,i) => <button value={i} onClick={handlePage} key={i}>{button}</button>)}
              { page<(allGames.length-15) && <button onClick={handlePageNext}>&rArr;</button>}   
             </div>
-            <div>
+            <div className='cards'>
              { allGames.length ? allGames.slice(page, (page+15)).map((game,i) => <Card game={game} key={i}/>) : <p>{message}</p>}
             </div>
             
-        </div>
+        </StyledContainer>
     )
 }
+
+const StyledContainer = styled.div`
+    background-image: url('https://p4.wallpaperbetter.com/wallpaper/915/148/63/1242x2208-px-galaxy-portrait-display-space-vertical-video-games-zelda-hd-art-wallpaper-preview.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    justify-content: space-around;
+    min-height: 100vh;
+    .cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .filter button {
+        color: #ffffff8f;
+        background-color: #630380 ;
+        border-radius: 5px;
+        margin: 5px 3px;
+        font-size: 18px;
+    }
+    .filter button:hover {
+        color: #ffffffca;
+        cursor: pointer;
+    }
+    .pagination button {
+        color: #ffffff8f;
+        background-color: #630380 ;
+        border-radius: 50%;
+        margin: 5px 3px;
+        font-size: 18px;
+    }
+    .pagination button:hover {
+        color: #ffffffca;
+        cursor: pointer;
+    }
+`
 
 export default Cards
